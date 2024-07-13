@@ -6,6 +6,11 @@ export const uploadPhoto = async (req, res) => {
     const { title, venue, date, headline, videoUrl, blogId } = req.body;
     const file = req.file;
 
+    const existingPhotosCount = await Gallery.countDocuments({ blogId });
+    if (existingPhotosCount >= 5) {
+      return res.status(400).json({ message: "Maximum limit of 5 photos reached" });
+    }
+    
     if (!file) {
       return res.status(400).json({ message: "Please upload a file" });
     }
