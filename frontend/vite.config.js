@@ -1,14 +1,15 @@
 import { defineConfig } from 'vite';
-import { createProxy } from 'vite-plugin-mock';
 
 export default defineConfig({
   plugins: [
-    createProxy({
+  ],
+  server: {
+    proxy: {
       '/api': {
-        target: 'http://localhost:8080', 
+        target: 'http://localhost:8080',
         changeOrigin: true,
         rewrite: path => path.replace(/^\/api/, '')
       },
-    }),
-  ],
+    },
+  },
 });
