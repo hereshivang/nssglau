@@ -1,16 +1,36 @@
 import React from "react";
+import { useState } from "react";
+import Eventform from "../Forms/Eventform";
 
 const Event = () => {
+  const [showForm, setShowForm] = useState(false);
+
+  const handleAddClick = () => {
+    setShowForm(true);
+  };
+
+  const handleCloseForm = () => {
+    setShowForm(false);
+  };
+
+  const handleFormSubmit = (formData) => {
+    console.log(formData);
+    setShowForm(false);
+  };
+
   return (
     <div className="p-6 mt-0 top-0 bg-white rounded shadow-md">
       <h2 className="text-2xl mb-4">Events</h2>
-      <div className="bg-red-500 rounded-lg shadow-md overflow-hidden aspect-w-1 aspect-h-1">
+      <div className="bg-red-500 rounded-lg shadow-md overflow-hidden w-64 ">
       <div className=" justify-between h-full p-6">
       <h3 className="text-xl mb-2">Create Event</h3>
-      <button className="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded">
+      <button onClick={handleAddClick} className="bg-blue-500 mt-10 hover:bg-blue-700 text-white py-2 px-4 rounded">
         Add
       </button>
   </div>
+  {showForm && (
+        <Eventform onSubmit={handleFormSubmit} onClose={handleCloseForm} />
+      )}
 </div>
 
       <div className="mt-6 mb-6">

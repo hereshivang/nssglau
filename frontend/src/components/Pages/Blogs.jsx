@@ -2,14 +2,18 @@ import React from 'react';
 
 const Blogs = () => {
   return (
-    <div className="p-6 bg-white rounded shadow-md">
+    <div className="p-6">
       <h2 className="text-2xl mb-4">Blogs</h2>
-      <div className="mb-6">
-        <h3 className="text-xl mb-2">Add Blog</h3>
-        <button className="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded">Add</button>
-      </div>
+      <div className="bg-red-500 rounded-lg shadow-md overflow-hidden w-64 ">
+      <div className=" justify-between h-full p-6">
+      <h3 className="text-xl mb-2">Create Blog</h3>
+      <button className="bg-blue-500 mt-10 hover:bg-blue-700 text-white py-2 px-4 rounded">
+        Add
+      </button>
+  </div>
+</div>
       <div>
-        <h3 className="text-xl mb-2">Recent Blog</h3>
+        <h3 className="text-xl mt-10 mb-2">Recent Blog</h3>
         <div className="grid grid-cols-4 gap-4">
         <div className="relative bg-white rounded-lg shadow-md overflow-hidden aspect-w-1 aspect-h-1">
             <div>
