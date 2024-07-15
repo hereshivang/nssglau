@@ -4,13 +4,13 @@ import { uploadOnCloudinary, deleteFromCloudinary } from "../config/configCloudi
 // Function to delete expired photos
 const deleteExpiredPhotos = async () => {
   const expiryDate = new Date();
-  expiryDate.setMonth(expiryDate.getMonth() - 3); // 3 months ago
+  expiryDate.setMonth(expiryDate.getMonth() - 3);
 
   try {
     const expiredPhotos = await Gallery.find({ createdAt: { $lt: expiryDate } });
 
     for (const photo of expiredPhotos) {
-      await deleteFromCloudinary(photo.cloudinaryId); // Delete image from Cloudinary
+      await deleteFromCloudinary(photo.cloudinaryId);
     }
 
     const result = await Gallery.deleteMany({ createdAt: { $lt: expiryDate } });
@@ -20,8 +20,8 @@ const deleteExpiredPhotos = async () => {
   }
 };
 
-// Call deleteExpiredPhotos periodically, e.g., every day
-setInterval(deleteExpiredPhotos, 24 * 60 * 60 * 1000); // Run once every day
+
+setInterval(deleteExpiredPhotos, 24 * 60 * 60 * 1000);
 
 // Create Photo and Save to DB
 export const uploadPhoto = async (req, res) => {
@@ -64,7 +64,7 @@ export const uploadPhoto = async (req, res) => {
   }
 };
 
-// Update Event
+// Update Photo
 export const updatePhoto = async (req, res) => {
   const { id } = req.params;
   try {
@@ -83,11 +83,10 @@ export const updatePhoto = async (req, res) => {
         throw new Error("Failed to get secure_url from Cloudinary");
       }
 
-      // Delete old image from Cloudinary
       await deleteFromCloudinary(updatePhoto.cloudinaryId);
 
       updatePhoto.imageUrl = cloudinaryResult.secure_url;
-      updatePhoto.cloudinaryId = cloudinaryResult.public_id; // Update public_id here
+      updatePhoto.cloudinaryId = cloudinaryResult.public_id;
     }
 
     if (title) updatePhoto.title = title;
@@ -115,7 +114,6 @@ export const deletePhoto = async (req, res) => {
       return res.status(404).json({ message: "Photo not found" });
     }
 
-    // Delete image from Cloudinary
     await deleteFromCloudinary(deletedPhoto.cloudinaryId);
 
     res.status(200).json({ message: "Photo deleted successfully" });
