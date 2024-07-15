@@ -13,7 +13,7 @@ export const configCloudinary = () => {
 
 export const uploadOnCloudinary = async (buffer) => {
   return new Promise((resolve, reject) => {
-    cloudinary.v2.uploader.upload_stream({ resource_type: 'auto' }, (error, result) => {
+    cloudinary.uploader.upload_stream({ resource_type: 'auto' }, (error, result) => {
       if (error) {
         reject(error);
       } else {
@@ -28,7 +28,7 @@ export const uploadOnCloudinary = async (buffer) => {
 
 export const deleteFromCloudinary = async (publicId) => {
   return new Promise((resolve, reject) => {
-    cloudinary.v2.uploader.destroy(publicId, (error, result) => {
+    cloudinary.uploader.destroy(publicId, (error, result) => {
       if (error) {
         reject(error);
       } else {
@@ -37,4 +37,3 @@ export const deleteFromCloudinary = async (publicId) => {
     });
   });
 };
-

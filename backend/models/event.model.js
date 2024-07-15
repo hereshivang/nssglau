@@ -5,6 +5,10 @@
         type: String,
         required : true
     },
+    cloudinaryId : {
+        type: String,
+        required : true
+    },
     description :{
         type : String,
         required : true
@@ -20,7 +24,11 @@
     venue : {
         type : String,
         required : true
-    }
+    },
+    createdAt: { 
+        type: Date, 
+        default: Date.now 
+    } 
  },{timestamps:true});
 
 export default mongoose.model("Event", eventSchema);

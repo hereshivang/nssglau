@@ -5,6 +5,10 @@ const gallerySchema = new mongoose.Schema({
         type: [String],
         required: true,        
     },
+    cloudinaryId : {
+        type: String,
+        required: true,
+    },
     title : {
         type : String,
         required : true
@@ -28,7 +32,11 @@ const gallerySchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Blog',
         required: true
-    }
+    },
+    createdAt: { 
+        type: Date, 
+        default: Date.now 
+    } 
 }, {timestamps : true});
 
 export default mongoose.model("Gallery", gallerySchema);

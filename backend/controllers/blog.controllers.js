@@ -2,6 +2,7 @@ import Blog from "../models/blog.model.js";
 import { uploadOnCloudinary, deleteFromCloudinary } from "../config/configCloudinary.js";
 
 
+// Deleting Uploaded Blogs After Every 3 Month
 const deleteExpiredBlogs = async () => {
   const expiryDate = new Date();
   expiryDate.setMonth(expiryDate.getMonth() - 3); 
@@ -60,7 +61,7 @@ export const createBlog = async (req, res) => {
   }
 };
 
-// Update Blog
+// Update Blog and Save to DB
 export const updateBlog = async (req, res) => {
   const { id } = req.params;
   const { title, content, author } = req.body;
@@ -98,7 +99,7 @@ export const updateBlog = async (req, res) => {
   }
 };
 
-// Delete Blog
+// Delete Blog from database
 export const deleteBlog = async (req, res) => {
   const { id } = req.params;
   try {

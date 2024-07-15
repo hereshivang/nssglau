@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 dotenv.config({path : './.env'});
 
+// Connect Database to Atlas
 const connectDB = async() => {
     try {
         await mongoose.connect(process.env.MONGO_URI)
@@ -10,6 +11,5 @@ const connectDB = async() => {
         console.log(`Database Error : ${error}`)
     }
 }
-
 
 export default connectDB;
