@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import axios from "axios";
 
 const Eventform = ({ onSubmit, onClose }) => {
   const [formData, setFormData] = useState({
@@ -18,15 +18,14 @@ const Eventform = ({ onSubmit, onClose }) => {
     });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (formData) => {
     const data = new FormData();
     data.append('title', formData.title);
     data.append('description', formData.description);
     data.append('imageUrl', formData.imageUrl);
     data.append('date', formData.date);
     data.append('venue', formData.venue);
-
+  
     try {
       const response = await axios.post('/api/events', data, {
         headers: {
@@ -34,10 +33,11 @@ const Eventform = ({ onSubmit, onClose }) => {
         }
       });
       console.log(response.data);
-      onSubmit(response.data);
     } catch (error) {
       console.error('Error uploading event:', error);
     }
+  
+    setShowForm(false);
   };
 
   return (

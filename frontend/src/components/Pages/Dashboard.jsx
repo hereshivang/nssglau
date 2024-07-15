@@ -42,7 +42,7 @@ const Dashboard = () => {
             </div>
             <div className="p-6 relative z-10">
               <h1 className="text-xl font-bold text-gray-800 mb-2">Upload</h1>
-              <Link to="/images">
+              <Link to="/uploads">
                 <button className="bg-red-500 hover:bg-red-700 text-white py-2 px-4 rounded">
                   Browse
                 </button>

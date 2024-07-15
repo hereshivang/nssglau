@@ -2,7 +2,7 @@ import { v2 as cloudinary } from "cloudinary";
 import dotenv from "dotenv";
 dotenv.config({ path: "./.env" });
 
-const configCloudinary = () => {
+export const configCloudinary = () => {
   cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
     api_key: process.env.CLOUDINARY_API_KEY,
@@ -11,25 +11,30 @@ const configCloudinary = () => {
   console.log("Cloudinary Configured");
 };
 
-const uploadOnCloudinary = async (buffer) => {
-  try {
-    if (!buffer) throw new Error("No file buffer provided");
-
-    console.log("Starting Cloudinary upload...");
-    const response = await new Promise((resolve, reject) => {
-      cloudinary.uploader.upload_stream({ resource_type: "auto" },
-        (error, result) => {
-          if (error) reject(error);
-          else resolve(result);
-        }).end(buffer);
-    });
-
-    console.log("Cloudinary upload successful:", response);
-    return response;
-  } catch (error) {
-    console.error("Error uploading file to Cloudinary:", error);
-    throw error;
-  }
+export const uploadOnCloudinary = async (buffer) => {
+  return new Promise((resolve, reject) => {
+    cloudinary.v2.uploader.upload_stream({ resource_type: 'auto' }, (error, result) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve({
+          secure_url: result.secure_url,
+          public_id: result.public_id, // Return public ID
+        });
+      }
+    }).end(buffer);
+  });
 };
 
-export { configCloudinary, uploadOnCloudinary };
+export const deleteFromCloudinary = async (publicId) => {
+  return new Promise((resolve, reject) => {
+    cloudinary.v2.uploader.destroy(publicId, (error, result) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(result);
+      }
+    });
+  });
+};
+
