@@ -1,18 +1,16 @@
-// blog.controller.js
-
 import Blog from "../models/blog.model.js";
 import { uploadOnCloudinary, deleteFromCloudinary } from "../config/configCloudinary.js";
 
-// Function to delete expired blogs
+
 const deleteExpiredBlogs = async () => {
   const expiryDate = new Date();
-  expiryDate.setMinutes(expiryDate.getMinutes() - 10); // 10 minutes ago
+  expiryDate.setMonth(expiryDate.getMonth() - 3); 
 
   try {
     const expiredBlogs = await Blog.find({ createdAt: { $lt: expiryDate } });
 
     for (const blog of expiredBlogs) {
-      await deleteFromCloudinary(blog.cloudinaryId); // Delete image from Cloudinary
+      await deleteFromCloudinary(blog.cloudinaryId);
     }
 
     const result = await Blog.deleteMany({ createdAt: { $lt: expiryDate } });
@@ -21,9 +19,7 @@ const deleteExpiredBlogs = async () => {
     console.error("Error deleting expired blogs:", error);
   }
 };
-
-// Call deleteExpiredBlogs periodically, e.g., every minute
-setInterval(deleteExpiredBlogs, 60 * 1000); // Run once every minute
+setInterval(deleteExpiredBlogs, 24 * 60 * 60 * 1000);
 
 // Create Blog and Save to DB
 export const createBlog = async (req, res) => {
@@ -48,11 +44,11 @@ export const createBlog = async (req, res) => {
 
     const newBlog = new Blog({
       imageUrl: cloudinaryResult.secure_url,
-      cloudinaryId: cloudinaryResult.public_id, // Save Cloudinary public ID
+      cloudinaryId: cloudinaryResult.public_id,
       title,
       content,
       author,
-      createdAt: new Date() // Set createdAt to current date/time
+      createdAt: new Date()
     });
 
     const createdBlog = await newBlog.save();
@@ -84,11 +80,10 @@ export const updateBlog = async (req, res) => {
         throw new Error("Failed to get secure_url from Cloudinary");
       }
 
-      // Delete old image from Cloudinary
       await deleteFromCloudinary(blog.cloudinaryId);
 
       blog.imageUrl = cloudinaryResult.secure_url;
-      blog.cloudinaryId = cloudinaryResult.public_id; // Update Cloudinary public ID
+      blog.cloudinaryId = cloudinaryResult.public_id;
     }
 
     blog.title = title || blog.title;
@@ -111,8 +106,6 @@ export const deleteBlog = async (req, res) => {
     if (!blog) {
       return res.status(404).json({ message: "Blog not found" });
     }
-
-    // Delete image from Cloudinary
     await deleteFromCloudinary(blog.cloudinaryId);
 
     await Blog.findByIdAndDelete(id);

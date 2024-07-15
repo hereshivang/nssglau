@@ -33,7 +33,7 @@ app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
 // APIs
 app.use("/api/blogs", blogRoutes);
 app.use("/api/events", eventRoutes);
-app.use("/api/gallery", galleryRoutes);
+app.use("/api/uploads", galleryRoutes);
 
 // Server Listening
 app.listen(process.env.PORT, () => {

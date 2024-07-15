@@ -19,7 +19,7 @@ export const uploadOnCloudinary = async (buffer) => {
       } else {
         resolve({
           secure_url: result.secure_url,
-          public_id: result.public_id, // Return public ID
+          public_id: result.public_id,
         });
       }
     }).end(buffer);
