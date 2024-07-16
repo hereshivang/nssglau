@@ -14,7 +14,7 @@ const Dashboard = () => {
             </div>
             <div className="p-6 relative z-10">
               <h1 className="text-xl font-bold text-gray-800 mb-2">Events</h1>
-              <Link to="/events">
+              <Link to="/admin/events">
                 <button className="bg-red-500 hover:bg-red-700 text-white py-2 px-4 rounded">
                   Browse
                 </button>
@@ -28,7 +28,7 @@ const Dashboard = () => {
             </div>
             <div className="p-6 relative z-10">
               <h1 className="text-xl font-bold text-gray-800 mb-2">Blogs</h1>
-              <Link to="/blogs">
+              <Link to="/admin/blogs">
                 <button className="bg-red-500 hover:bg-red-700 text-white py-2 px-4 rounded">
                   Browse
                 </button>
@@ -42,7 +42,7 @@ const Dashboard = () => {
             </div>
             <div className="p-6 relative z-10">
               <h1 className="text-xl font-bold text-gray-800 mb-2">Upload</h1>
-              <Link to="/uploads">
+              <Link to="/admin/uploads">
                 <button className="bg-red-500 hover:bg-red-700 text-white py-2 px-4 rounded">
                   Browse
                 </button>
@@ -56,7 +56,7 @@ const Dashboard = () => {
             </div>
             <div className="p-6 relative z-10">
               <h1 className="text-xl font-bold text-gray-800 mb-2">Council</h1>
-              <Link to="/council">
+              <Link to="admin/council">
                 <button className="bg-red-500 hover:bg-red-700 text-white py-2 px-4 rounded">
                   Browse
                 </button>

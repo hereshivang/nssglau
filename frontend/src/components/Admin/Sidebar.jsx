@@ -1,8 +1,17 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { useAuth } from '../Context/Authcontext';
 import nssLogo from "../../assets/nsslogo.png";
 
 const Sidebar = () => {
+  const navigate = useNavigate();
+  const { logout } = useAuth();
+
+  const handleLogout = () => {
+    logout();
+    navigate('/admin/login');
+  };
+
   return (
     <div className="bg-gray-800 text-white w-64 min-h-screen p-4">
       <div className="text-center text-2xl mb-8">
@@ -16,7 +25,7 @@ const Sidebar = () => {
 
       <nav className="space-y-2">
         <NavLink 
-          to="/" 
+          to="/admin/dashboard" 
           end 
           className={({ isActive }) => 
             isActive ? "text-center block px-4 py-2 rounded bg-gray-700" : "block px-4 py-2 rounded hover:bg-gray-700"
@@ -25,7 +34,7 @@ const Sidebar = () => {
           Dashboard
         </NavLink>
         <NavLink 
-          to="/events" 
+          to="/admin/events" 
           className={({ isActive }) => 
             isActive ? "text-center block px-4 py-2 rounded bg-gray-700" : "block px-4 py-2 rounded hover:bg-gray-700"
           }
@@ -33,7 +42,7 @@ const Sidebar = () => {
           Events
         </NavLink>
         <NavLink 
-          to="/blogs" 
+          to="/admin/blogs" 
           className={({ isActive }) => 
             isActive ? "text-center block px-4 py-2 rounded bg-gray-700" : "block px-4 py-2 rounded hover:bg-gray-700"
           }
@@ -41,7 +50,7 @@ const Sidebar = () => {
           Blogs
         </NavLink>
         <NavLink 
-          to="/uploads" 
+          to="/admin/uploads" 
           className={({ isActive }) => 
             isActive ? "text-center block px-4 py-2 rounded bg-gray-700" : "block px-4 py-2 rounded hover:bg-gray-700"
           }
@@ -49,7 +58,7 @@ const Sidebar = () => {
           Uploads
         </NavLink>
         <NavLink 
-          to="/council" 
+          to="/admin/council" 
           className={({ isActive }) => 
             isActive ? "text-center block px-4 py-2 rounded bg-gray-700" : "block px-4 py-2 rounded hover:bg-gray-700"
           }
@@ -58,7 +67,12 @@ const Sidebar = () => {
         </NavLink>
       </nav>
       <div className="mt-8">
-        <button className="w-full bg-red-500 hover:bg-red-700 text-white py-2 rounded">Logout</button>
+        <button 
+          className="w-full bg-red-500 hover:bg-red-700 text-white py-2 rounded"
+          onClick={handleLogout}
+        >
+          Logout
+        </button>
       </div>
     </div>
   );
