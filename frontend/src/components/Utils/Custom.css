@@ -1,0 +1,12 @@
+.custom-cursor {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: white;
+    pointer-events: none; /* Makes sure the cursor doesn't block other interactions */
+    transform: translate(-50%, -50%); /* Centers the cursor on the mouse position */
+    z-index: 9999; /* Ensures it stays above other elements */
+    transition: transform 0.1s ease, background-color 0.3s ease; /* Smooth movement */
+  }
+  
