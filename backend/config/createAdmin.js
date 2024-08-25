@@ -1,4 +1,3 @@
-import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import Admin from '../models/admin.model.js';  // Adjust the path as necessary
 import connectDB from "./db.js";
